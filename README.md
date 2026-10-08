@@ -1,7 +1,6 @@
 # hidraw
 
 [![CI](https://github.com/GregDuhamel/hidraw/actions/workflows/ci.yml/badge.svg)](https://github.com/GregDuhamel/hidraw/actions/workflows/ci.yml)
-[![Lint](https://github.com/GregDuhamel/hidraw/actions/workflows/lint.yml/badge.svg)](https://github.com/GregDuhamel/hidraw/actions/workflows/lint.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Linux hidraw for daemons: find a device's hidraw nodes through sysfs, talk to

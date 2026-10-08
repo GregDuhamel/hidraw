@@ -1,5 +1,9 @@
 name: CI
 
+# rustfmt, clippy, build and tests (unit, integration, doc) on stable and on
+# the MSRV, rustdoc and cargo audit, all with warnings denied: the Rust CI
+# shared by this author's repositories, kept in uhid-battery.
+
 on:
   push:
     branches: [main]
@@ -10,40 +14,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  CARGO_TERM_COLOR: always
-  RUST_BACKTRACE: 1
-
 # The token only needs to read the repository: no job here writes anything.
 permissions:
   contents: read
 
 jobs:
-  test:
-    name: Test (${{ matrix.rust }})
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        # The second entry is the MSRV declared in Cargo.toml.
-        rust: [stable, "1.85"]
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Install Rust ${{ matrix.rust }}
-        uses: dtolnay/rust-toolchain@7e38f4b43b4db5c8dd498af069a4f6196df1d067 # master
-        with:
-          toolchain: ${{ matrix.rust }}
-
-      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
-        with:
-          key: ${{ matrix.rust }}
-
-      - name: Build
-        run: cargo build --all-targets
-
-      - name: Test
-        run: cargo test --all-targets
-
-      - name: Doc tests
-        run: cargo test --doc
+  rust:
+    uses: GregDuhamel/uhid-battery/.github/workflows/rust-ci.yml@main
+    with:
+      # The MSRV declared in Cargo.toml.
+      msrv: "1.85"
+      all-features: true
