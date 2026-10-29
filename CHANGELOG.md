@@ -6,6 +6,10 @@ tags consumers pin (`tag = "vX.Y.Z"`).
 
 ## [Unreleased]
 
+### Changed
+
+- Dependencies refreshed (rustix 1.1.6, libc 0.2.191) and the pinned GitHub Actions bumped; no code change.
+
 ## [0.1.0] - 2026-10-08
 
 The hidraw transport that razerd, thermaltaked and HeadsetBatteryIndicator
